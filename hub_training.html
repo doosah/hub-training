@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный курс по системе HUB</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #007BFF;
+        }
+
+        .module {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .theory {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .practice {
+            background: #e9f7fe;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+        }
+
+        .quiz-options {
+            margin-left: 20px;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .wrong-answer {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Интерактивный курс по системе HUB</h1>
+        <p>Управление складскими процессами</p>
+    </header>
+
+    <div class="container">
+        <div class="module">
+            <h2>Модуль 1: Введение в систему HUB</h2>
+            <div class="theory">
+                <h3>Теория</h3>
+                <p><strong>HUB</strong> — это система для управления складскими предметами и процессами их перемещения, хранения и инвентаризации.</p>
+                <p><strong>Ключевые понятия:</strong></p>
+                <ul>
+                    <li><strong>Предмет:</strong> Объект хранения (например, коробка, отправление).</li>
+                    <li><strong>Логистический контейнер (ЛК):</strong> Емкость для хранения/перемещения предметов.</li>
+                    <li><strong>Инвентаризация:</strong> Проверка фактического наличия предметов на складе.</li>
+                    <li><strong>КМО:</strong> Документация о материальных ошибках.</li>
+                    <li><strong>ЦМН:</strong> Цель доставки.</li>
+                    <li><strong>Тайм-слот:</strong> Временной интервал для доставки.</li>
+                </ul>
+            </div>
+            <div class="practice">
+                <h3>Практика</h3>
+                <p><strong>Вопрос:</strong> Какие объекты могут быть предметами в системе HUB?</p>
+                <div class="quiz-options">
+                    <label><input type="checkbox" id="q1a"> Коробка</label>
+                    <label><input type="checkbox" id="q1b"> Грузовик</label>
+                    <label><input type="checkbox" id="q1c"> ТЯ (тарный ящик)</label>
+                    <label><input type="checkbox" id="q1d"> Сотрудник</label>
+                </div>
+                <button onclick="checkAnswer('q1', ['q1a', 'q1c'])">Проверить</button>
+                <div id="q1-result" class="result">Правильно! Переходите к следующему модулю.</div>
+                <div id="q1-wrong" class="wrong-answer">Неверно. Попробуйте ещё раз.</div>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2>Модуль 2: Основы интерфейса HUB и карточка предмета</h2>
+            <div class="theory">
+                <h3>Теория</h3>
+                <p>Интерфейс HUB включает главное меню, схему склада и таблицу предметов. Карточка предмета — детализированное окно с информацией о конкретном объекте.</p>
+                <p><strong>Структура карточки предмета:</strong></p>
+                <table>
+                    <tr>
+                        <th>Вкладка</th>
+                        <th>Описание</th>
+                    </tr>
+                    <tr>
+                        <td>«О предмете»</td>
+                        <td>Основная информация о предмете.</td>
+                    </tr>
+                    <tr>
+                        <td>«Состав»</td>
+                        <td>Текущий и исторический состав контейнера.</td>
+                    </tr>
+                    <tr>
+                        <td>«История (перемещения)»</td>
+                        <td>История перемещений предмета.</td>
+                    </tr>
+                    <tr>
+                        <td>«Отгрузки»</td>
+                        <td>Запись о выдаче предмета со склада.</td>
+                    </tr>
+                    <tr>
+                        <td>«Транспорт»</td>
+                        <td>История взаимодействия с транспортными средствами.</td>
+                    </tr>
+                    <tr>
+                        <td>«История свойств»</td>
+                        <td>Изменения свойств предмета.</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="practice">
+                <h3>Практика</h3>
+                <p><strong>Задание:</strong> Найдите предмет с ID "BOX-456" и изучите вкладку «О предмете».</p>
+                <button onclick="alert('Используйте поиск по ID в системе HUB.')">Выполнить задание</button>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2>Модуль 3: Поиск предметов в HUB</h2>
+            <div class="theory">
+                <h3>Теория</h3>
+                <p>Чтобы найти предмет:</p>
+                <ol>
+                    <li>Нажмите значок «лупы» (🔍) или сочетание клавиш «Ctrl+I».</li>
+                    <li>Введите идентификатор (ID, SCAN-IT, ШК этикетки).</li>
+                    <li>Система выведет список найденных предметов.</li>
+                </ol>
+            </div>
+            <div class="practice">
+                <h3>Практика</h3>
+                <p><strong>Задание:</strong> Найдите предмет с ID "GR-00123" и откройте его карточку.</p>
+                <button onclick="alert('Используйте поиск по ID в системе HUB.')">Выполнить задание</button>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2>Модуль 4: Работа с вкладками карточки предмета</h2>
+            <div class="theory">
+                <h3>Теория</h3>
+                <p>Каждая вкладка карточки предмета предоставляет уникальную информацию:</p>
+                <ul>
+                    <li><strong>«О предмете»:</strong> Основные данные (тип, статус, ID, номенклатура).</li>
+                    <li><strong>«Состав»:</strong> Список предметов внутри контейнера.</li>
+                    <li><strong>«История (перемещения)»:</strong> История перемещений предмета.</li>
+                    <li><strong>«Отгрузки»:</strong> Информация о выдаче предмета со склада.</li>
+                    <li><strong>«Транспорт»:</strong> История взаимодействия с транспортными средствами.</li>
+                    <li><strong>«История свойств»:</strong> Изменения свойств предмета.</li>
+                </ul>
+            </div>
+            <div class="practice">
+                <h3>Практика</h3>
+                <p><strong>Задание:</strong> Откройте вкладку «Состав» для контейнера "LC-777" и изучите его текущий состав.</p>
+                <button onclick="alert('Найдите контейнер в системе HUB и откройте вкладку «Состав».')">Выполнить задание</button>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2>Модуль 5: Пересчеты и инвентаризации в HUB</h2>
+            <div class="theory">
+                <h3>Теория</h3>
+                <p>Для запуска пересчета:</p>
+                <ol>
+                    <li>Выберите зону на схеме склада.</li>
+                    <li>Нажмите «Запустить пересчет».</li>
+                    <li>Просмотрите детали пересчета: фактический список, балансовый список, излишки, недостачи.</li>
+                </ol>
+            </div>
+            <div class="practice">
+                <h3>Практика</h3>
+                <p><strong>Задание:</strong> Запустите пересчет для ячейки "B-42" и проанализируйте результаты.</p>
+                <button onclick="alert('Выберите ячейку на схеме склада и нажмите «Запустить пересчет».')">Выполнить задание</button>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2>Модуль 6: Работа с логистическими контейнерами</h2>
+            <div class="theory">
+                <h3>Теория</h3>
+                <p>Для формирования контейнера:</p>
+                <ol>
+                    <li>Найдите контейнер и нажмите «Сформировать».</li>
+                    <li>Убедитесь, что контейнер соответствует условиям, и отмените формирование.</li>
+                </ol>
+            </div>
+            <div class="practice">
+                <h3>Практика</h3>
+                <p><strong>Задание:</strong> Найдите контейнер "LC-999" и сформируйте его.</p>
+                <button onclick="alert('Найдите контейнер в системе HUB и нажмите «Сформировать».')">Выполнить задание</button>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2>Модуль 7: Настройка станций и топологии склада</h2>
+            <div class="theory">
+                <h3>Теория</h3>
+                <p>Типы станций и их теги:</p>
+                <ul>
+                    <li><strong>Зона ворот:</strong> «Станция», «Буфер выгрузки», «Резервный буфер выгрузки».</li>
+                    <li><strong>Сортировка 1 степень:</strong> «Ячейка закрытых тар».</li>
+                    <li><strong>Сортировка 2 степень:</strong> «Буфер входящий 2степСОРТ», «Буфер исходящий 2степСОРТ».</li>
+                </ul>
+            </div>
+            <div class="practice">
+                <h3>Практика</h3>
+                <p><strong>Задание:</strong> Настройте станцию «Зона ворот» с тегом «Буфер выгрузки».</p>
+                <button onclick="alert('Выберите ячейку на схеме склада и присвойте тег «Буфер выгрузки».')">Выполнить задание</button>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2>Модуль 8: Практические задачи</h2>
+            <div class="theory">
+                <h3>Теория</h3>
+                <p>Выполните следующие задачи:</p>
+                <ol>
+                    <li>Запустите пересчет для ячейки "B-42" и выявите излишки.</li>
+                    <li>Измените ЦМН для коробки "BOX-999" и скачайте историю свойств.</li>
+                </ol>
+            </div>
+            <div class="practice">
+                <h3>Практика</h3>
+                <p><strong>Задание:</strong> Выполните обе задачи в системе HUB.</p>
+                <button onclick="alert('Выполните задачи в системе HUB.')">Выполнить задание</button>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <h2>Тест по системе HUB</h2>
+            <p>Ответьте на все вопросы, чтобы увидеть результаты.</p>
+
+            <div class="quiz-question">
+                <h3>Вопрос 1:</h3>
+                <p>Какие вкладки есть в карточке предмета в HUB?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q1" value="a"> «О предмете», «Состав», «История (перемещения)», «Отгрузки», «Транспорт», «История свойств»</label>
+                    <label><input type="radio" name="q1" value="b"> «Закупки», «Продажи», «Анализ»</label>
+                    <label><input type="radio" name="q1" value="c"> «Персонал», «Устройства», «Настройки»</label>
+                    <label><input type="radio" name="q1" value="d"> «Отчеты», «Логи», «Alerts»</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 2:</h3>
+                <p>Как инициировать поиск предмета в HUB?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q2" value="a"> Нажать Ctrl+I или значок лупы 🔍 в правом верхнем углу</label>
+                    <label><input type="radio" name="q2" value="b"> Кликнуть на ID предмета в таблице «Предметы»</label>
+                    <label><input type="radio" name="q2" value="c"> Зайти в вкладку «Транспорт» и выбрать фильтр</label>
+                    <label><input type="radio" name="q2" value="d"> Открыть историю перемещений и ввести номер</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 3:</h3>
+                <p>Какие из перечисленных типов предметов упоминаются в документации HUB?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q3" value="a"> ТЯ, КТЯ, груз, коробка, отправление</label>
+                    <label><input type="radio" name="q3" value="b"> Мобильные устройства, ПК, ноутбуки</label>
+                    <label><input type="radio" name="q3" value="c"> Транспортные средства, водители, маршруты</label>
+                    <label><input type="radio" name="q3" value="d"> Клиенты, поставщики, контракты</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 4:</h3>
+                <p>Для чего используется вкладка «История свойств» в карточке предмета?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q4" value="a"> Просмотр изменений статуса, ЦМН, тайм-слота и других свойств</label>
+                    <label><input type="radio" name="q4" value="b"> Анализ текущего и исторического состава контейнера</label>
+                    <label><input type="radio" name="q4" value="c"> Отслеживание перемещений предмета между ячейками</label>
+                    <label><input type="radio" name="q4" value="d"> Просмотр результатов инвентаризаций и списков излишков</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 5:</h3>
+                <p>При каких условиях можно отменить формирование логистического контейнера?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q5" value="a"> Если контейнер сформирован на текущем складе, не входит в другой контейнер и не отгружен со склада</label>
+                    <label><input type="radio" name="q5" value="b"> Если контейнер в статусе «Формируется»</label>
+                    <label><input type="radio" name="q5" value="c"> Если контейнер уже расформирован</label>
+                    <label><input type="radio" name="q5" value="d"> Если контейнер содержит более 10 предметов</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 6:</h3>
+                <p>Как получить историю сканирования ТСД для предмета?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q6" value="a"> Кликнуть на «История сканирования» над таблицей в вкладке «История (перемещения)»</label>
+                    <label><input type="radio" name="q6" value="b"> Зайти в вкладку «Транспорт» и скачать Excel</label>
+                    <label><input type="radio" name="q6" value="c"> Открыть вкладку «Состав» и выбрать тогл «Только с пустой датой извлечения»</label>
+                    <label><input type="radio" name="q6" value="d"> Использовать фильтр «Логистические точки» в истории перемещений</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 7:</h3>
+                <p>Какие теги нужны для ячеек персонального буфера выгрузки в зоне ворот?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q7" value="a"> «Буфер выгрузки»</label>
+                    <label><input type="radio" name="q7" value="b"> «Резервный буфер выгрузки»</label>
+                    <label><input type="radio" name="q7" value="c"> «Станция»</label>
+                    <label><input type="radio" name="q7" value="d"> «Буфер-сорт»</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 8:</h3>
+                <p>Для просмотра истории изменения состава логистического контейнера, что нужно сделать на вкладке «Состав»?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q8" value="a"> Включить тогл «Только с пустой датой извлечения»</label>
+                    <label><input type="radio" name="q8" value="b"> Отключить тогл «Только с пустой датой извлечения»</label>
+                    <label><input type="radio" name="q8" value="c"> Нажать кнопку «скачать» Excel</label>
+                    <label><input type="radio" name="q8" value="d"> Изменить тип предмета в фильтре</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 9:</h3>
+                <p>Какова последовательность действий для запуска МУС на объекте СЦ/ТСЦ?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q9" value="a"> 1. Настройка топологии склада; 2. Разметка склада; 3. Добавление складского оборудования; 4. Настройка в СУС; 5. Импорт шаблона Excel</label>
+                    <label><input type="radio" name="q9" value="b"> 1. Запуск инвентаризации; 2. Создание контейнера; 3. Настройка МУС</label>
+                    <label><input type="radio" name="q9" value="c"> 1. Создание сортеров; 2. Настройка направлений сортировки; 3. Импорт Excel</label>
+                    <label><input type="radio" name="q9" value="d"> 1. Проверка утерянных предметов; 2. Активация станции «Зона ворот»; 3. Запуск МУС</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 10:</h3>
+                <p>Какие требования к топологии при настройке «Сортировки (Эффективный склад)»?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q10" value="a"> Отдельная зона с тегом «Зона сортировки Эффективный склад» и использование шаблона «Паллет эфф склад»</label>
+                    <label><input type="radio" name="q10" value="b"> Тег «Станция» для всех ячеек склада</label>
+                    <label><input type="radio" name="q10" value="c"> Минимум 5 буферов с тегом «Буфер-сорт»</label>
+                    <label><input type="radio" name="q10" value="d"> Активация зоны ворот и назначение резервного буфера</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 11:</h3>
+                <p>Какие типы станций и их теги должны быть установлены для корректной работы модуля «Сортировка 2 степень»?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q11" value="a"> Станция типа «Сортировка 2 степ» с тегами «Буфер входящий 2степСОРТ» и «Буфер исходящий 2степСОРТ»</label>
+                    <label><input type="radio" name="q11" value="b"> Станция типа «Зона ворот» с тегами «Буфер выгрузки» и «Станция»</label>
+                    <label><input type="radio" name="q11" value="c"> Станция типа «Сортировка 1 степ» с тегом «Ячейка закрытых тар»</label>
+                    <label><input type="radio" name="q11" value="d"> Станция типа «МУС» с тегами «СЦ» и «ТСЦ»</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>Вопрос 12:</h3>
+                <p>Какие данные включаются в детализированную информацию при нажатии на ID инвентаризации в вкладке «Пересчеты»?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q12" value="a"> Фактический список, балансовый список, списки излишков и недостач</label>
+                    <label><input type="radio" name="q12" value="b"> История перемещений, статус контейнера и даты формирования</label>
+                    <label><input type="radio" name="q12" value="c"> Список исполнителей задания, дата и время пересчета</label>
+                    <label><input type="radio" name="q12" value="d"> Теги станций, капаситет сотрудников и адрес хранения</label>
+                </div>
+            </div>
+
+            <button onclick="checkQuiz()">Завершить тест</button>
+            <div id="quiz-result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(questionId, correctAnswers) {
+            let isCorrect = true;
+            correctAnswers.forEach(id => {
+                const element = document.getElementById(id);
+                if (!element.checked) {
+                    isCorrect = false;
+                }
+            });
+
+            const resultElement = document.getElementById(questionId + '-result');
+            const wrongElement = document.getElementById(questionId + '-wrong');
+
+            if (isCorrect) {
+                resultElement.style.display = 'block';
+                wrongElement.style.display = 'none';
+            } else {
+                resultElement.style.display = 'none';
+                wrongElement.style.display = 'block';
+            }
+        }
+
+        function checkQuiz() {
+            const answers = {
+                q1: 'a',
+                q2: 'a',
+                q3: 'a',
+                q4: 'a',
+                q5: 'a',
+                q6: 'a',
+                q7: 'a',
+                q8: 'b',
+                q9: 'a',
+                q10: 'a',
+                q11: 'a',
+                q12: 'a'
+            };
+
+            let score = 0;
+            let resultText = '';
+
+            for (let i = 1; i <= 12; i++) {
+                const questionName = `q${i}`;
+                const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+                if (selectedAnswer && selectedAnswer.value === answers[questionName]) {
+                    score++;
+                }
+            }
+
+            if (score === 12) {
+                resultText = `Поздравляем! Вы правильно ответили на все вопросы.`;
+            } else {
+                resultText = `Вы ответили правильно на ${score} из 12 вопросов. Пожалуйста, вернитесь к модулям, где были допущены ошибки, и повторите материал.`;
+            }
+
+            document.getElementById('quiz-result').innerHTML = resultText;
+            document.getElementById('quiz-result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
